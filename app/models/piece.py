@@ -9,5 +9,7 @@ class Piece(db.Model):
     order_year = db.Column(db.Integer)
     delivery_year = db.Column(db.Integer)
     likes_count = db.Column(db.Integer)
+    image_url = db.Column(db.String)
+    is_available = db.Column(db.Boolean)
 
     comment = db.relationship("Comment", backref="piece", passive_deletes=True)
