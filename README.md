@@ -1,4 +1,7 @@
-# Inspiration Board: Back-end Layer
+# House of Vange dot com : Back-end Layer
+
+This is the back end for the future houseofvange.com. It has models and routes for Piece, Comment, Guestbook Entry, and the current price point sticker.
+
 
 This scaffold includes the following:
 
