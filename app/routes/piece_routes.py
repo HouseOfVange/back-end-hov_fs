@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from app.models.piece import Piece
 from app import db
+import os
 
 piece_bp = Blueprint('piece', __name__, url_prefix='/pieces')
 

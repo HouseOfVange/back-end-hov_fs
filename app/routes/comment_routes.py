@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from app import db
 from app.models.comment import Comment
 from app.models.piece import Piece
+import os
 
 comment_bp = Blueprint('comment', __name__, url_prefix='/pieces')
 
