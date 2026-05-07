@@ -17,16 +17,17 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
         "SQLALCHEMY_DATABASE_URI")
 
-    # Import models here for Alembic setup    
+    # Import models for Alembic setup    
     from app.models.price_sticker import PriceSticker
     from app.models.piece import Piece
     from app.models.comment import Comment
     from app.models.guestbook_entry import GuestbookEntry
+    from app.models.order import Order
 
     db.init_app(app)
     migrate.init_app(app, db)
 
-    # Register Blueprints here
+    # Register Blueprints 
     from .routes.price_sticker_routes import price_sticker_bp
     app.register_blueprint(price_sticker_bp)
 
@@ -38,6 +39,9 @@ def create_app():
 
     from .routes.guestbook_routes import guestbook_bp
     app.register_blueprint(guestbook_bp)
+
+    from .routes.order_routes import order_bp
+    app.register_blueprint(order_bp)
 
     CORS(app)
     return app
