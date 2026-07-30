@@ -1,8 +1,40 @@
 # House of Vange dot com : Back-end Layer
 
-This is the back end for the future houseofvange.com. It has models and routes for Piece, Comment, Guestbook Entry, and the current price point sticker.
+This is the back end for the future houseofvange.com. It has models and routes for Piece, Comment, Guestbook Entry, and the Price Point.
 
+## One-Time Setup
+- Install Homebrew `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+- Install Postgres `brew install postgresql@14`
+- Run `createdb hov_db`
+- Create virtual environment `python3 -m venv venv`
+- Activate venv `source venv/bin/activate`
+- Install dependencies `pip install -r requirements.txt`
+- Create a `.env` file in the project root `touch .env` and add:
+    - `FLASK_ENV=development`
+    - `SQLALCHEMY_DATABASE_URI=postgresql://localhost/hov_db`
 
+## Local Run
+To run this backend locally (after one time set up) follow these steps:
+1. Start Postgres (if not already running) 
+`sudo brew services start postgresql@14`
+    - If Postgres fails to start, remove the stale lock file and restart:
+      `rm /usr/local/var/postgresql@14/postmaster.pid` then `brew services restart postgresql@14`
+2. Activate venv
+`source venv/bin/activate`
+3. Run migrations
+`flask db upgrade`
+4. Start Flask
+`flask run`  
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+# Old things copied from previous project...
 This scaffold includes the following:
 
 ## `app/__init__.py`
