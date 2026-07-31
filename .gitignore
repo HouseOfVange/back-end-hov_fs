@@ -107,6 +107,9 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+# Bruno / postman requests
+HOV.com
+
 # Environments
 .env
 .venv
