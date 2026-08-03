@@ -22,7 +22,7 @@ To run this backend locally (after one time set up) follow these steps:
 3. Run migrations
 `flask db upgrade`
 4. Start Flask
-`flask run`  
+`flask run --port 1414`  
 <br>
 <br>
 <br>
