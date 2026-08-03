@@ -27,6 +27,8 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
+    CORS(app)
+
     # Register Blueprints 
     from .routes.price_sticker_routes import price_sticker_bp
     app.register_blueprint(price_sticker_bp)
@@ -43,5 +45,4 @@ def create_app():
     from .routes.order_routes import order_bp
     app.register_blueprint(order_bp)
 
-    CORS(app)
     return app
