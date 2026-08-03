@@ -7,7 +7,7 @@ class GuestbookEntry(db.Model):
     author = db.Column(db.String, nullable=False)
     message = db.Column(db.String, nullable=False)
     likes_count = db.Column(db.Integer, default=0)
-    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
     
     def to_dict(self):
         return {
@@ -15,6 +15,6 @@ class GuestbookEntry(db.Model):
             "author": self.author,
             "message": self.message,
             "likes_count": self.likes_count,
-            "created_at": self.created_at
+            "created_at": self.created_at.isoformat()
         }
     

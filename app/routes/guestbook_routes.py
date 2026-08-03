@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from app import db
 from app.models.guestbook_entry import GuestbookEntry
 import os
+from datetime import datetime, timezone
 
 guestbook_bp = Blueprint('guestbook_entry', __name__, url_prefix='/guestbook')
 
@@ -20,6 +21,7 @@ def create_guestbook_entry():
     new_guestbook_entry = GuestbookEntry(
         author=data.get('author'),
         message=data.get('message'),
+        created_at=datetime.now(timezone.utc)
     )
     
     db.session.add(new_guestbook_entry)
