@@ -7,7 +7,7 @@ class Piece(db.Model):
     piece_description = db.Column(db.String)
     order_year = db.Column(db.Integer)
     delivery_year = db.Column(db.Integer)
-    image_url = db.Column(db.String)
+    images = db.Column(db.JSON)
     is_available = db.Column(db.Boolean)
 
     comment = db.relationship("Comment", backref="piece", passive_deletes=True)
@@ -20,6 +20,6 @@ class Piece(db.Model):
             "description": self.piece_description,
             "order_year": self.order_year,
             "delivery_year": self.delivery_year,
-            "image_url": self.image_url,
+            "images": self.images,
             "is_available": self.is_available
         }
