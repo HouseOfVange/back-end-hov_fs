@@ -38,7 +38,7 @@ def create_piece():
         piece_description=data.get('description'),
         order_year=data.get('order_year'),
         delivery_year=data.get('delivery_year'),
-        image_url=data.get('image_url'),
+        images=data.get('images'),
         is_available=data.get('is_available')
     )
     
@@ -46,6 +46,44 @@ def create_piece():
     db.session.commit()
     
     return jsonify(new_piece.to_dict()), 201
+
+# PATCH - UPDATE ANY PIECE FIELD
+@piece_bp.route('/<int:piece_id>', methods=['PATCH'])
+def update_piece(piece_id):
+    piece = Piece.query.get(piece_id)
+    if piece is None:
+        return jsonify({"error": f"Piece {piece_id} not found"}), 404
+    
+    data = request.get_json()
+
+    if 'title' in data:
+        piece.title = data['title']
+
+    if 'client' in data:
+        piece.client = data['client']
+
+    if 'description' in data:
+        piece.piece_description = data['description']
+
+    if 'order_year' in data:
+        piece.order_year = data['order_year']
+
+    if 'delivery_year' in data:
+        piece.delivery_year = data['delivery_year']
+
+    if 'is_available' in data:
+        piece.is_available = data['is_available']
+
+    if 'new_image' in data:
+        current_images = piece.images or []
+        current_images.append(data['new_image'])
+        piece.images = current_images
+
+    if 'images' in data:
+        piece.images = data['images']
+
+    db.session.commit()
+    return jsonify(piece.to_dict()), 200
 
 # DELETE - ONE PIECE
 @piece_bp.route('/<int:piece_id>', methods=['DELETE'])
