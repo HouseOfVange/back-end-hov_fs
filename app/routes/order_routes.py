@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from app import db
 from app.models.order import Order
 import os
+import resend
 
 resend.api_key = os.environ["RESEND_API_KEY"]
 
