@@ -3,6 +3,8 @@ from app import db
 from app.models.order import Order
 import os
 
+resend.api_key = os.environ["RESEND_API_KEY"]
+
 order_bp = Blueprint('order', __name__, url_prefix='/order')
 
 # POST - CREATE NEW ORDER
