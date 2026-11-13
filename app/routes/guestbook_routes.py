@@ -3,6 +3,10 @@ from app import db
 from app.models.guestbook_entry import GuestbookEntry
 import os
 from datetime import datetime, timezone
+import resend
+from app.services.email_send_service import send_new_guestbook_entry_email
+
+resend.api_key = os.environ["RESEND_API_KEY"]
 
 guestbook_bp = Blueprint('guestbook_entry', __name__, url_prefix='/guestbook')
 
@@ -27,6 +31,8 @@ def create_guestbook_entry():
     db.session.add(new_guestbook_entry)
     db.session.commit()
     
+    send_new_guestbook_entry_email(new_guestbook_entry)
+
     return jsonify(new_guestbook_entry.to_dict()), 201
 
 # PATCH - INCREMENT GUESTBOOK ENTRY LIKES BY 1

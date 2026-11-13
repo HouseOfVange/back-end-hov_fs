@@ -23,3 +23,18 @@ def send_new_order_email(order):
             {safe(order.understand_that_hov_cost_money)}</p>
         """,
     })
+
+def send_new_guestbook_entry_email(entry):
+    def safe(value):
+        return escape(str(value if value is not None else "Not provided"))
+
+    resend.Emails.send({
+        "from": "HOV <order@updates.houseofvange.com>",
+        "to": ["house.of.vange@gmail.com"],
+        "subject": f"New Guestbook Entry from {entry.author or 'Unknown'}",
+        "html": f"""
+            <h1>New House of Vange Guestbook Entry</h1>
+            <p><strong>Author:</strong> {safe(entry.author)}</p>
+            <p><strong>Message:</strong> {safe(entry.message)}</p>
+        """,
+    })
