@@ -10,7 +10,7 @@ def send_new_order_email(order):
         return escape(str(value if value is not None else "Not provided"))
 
     resend.Emails.send({
-        "from": "House of Vange <onboarding@resend.dev>",
+        "from": "HOV <order@updates.houseofvange.com>",
         "to": ["house.of.vange@gmail.com"],
         "subject": f"New order from {order.name or 'Unknown'}",
         "html": f"""
