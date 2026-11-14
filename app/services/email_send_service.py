@@ -38,3 +38,19 @@ def send_new_guestbook_entry_email(entry):
             <p><strong>Message:</strong> {safe(entry.message)}</p>
         """,
     })
+
+def send_new_comment_email(comment, piece):
+    def safe(value):
+        return escape(str(value if value is not None else "Not provided"))
+
+    resend.Emails.send({
+        "from": "HOV <order@updates.houseofvange.com>",
+        "to": ["house.of.vange@gmail.com"],
+        "subject": f"New Comment on {piece.title} ({piece.piece_description}) from {comment.author or 'Unknown'}",
+        "html": f"""
+            <h1>New House of Vange Comment on {piece.title}</h1>
+            <p><strong>Description:</strong> {safe(piece.piece_description)}</p>
+            <p><strong>Author:</strong> {safe(comment.author)}</p>
+            <p><strong>Message:</strong> {safe(comment.message)}</p>
+        """,
+    })

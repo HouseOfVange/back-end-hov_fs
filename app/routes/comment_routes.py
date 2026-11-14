@@ -3,6 +3,10 @@ from app import db
 from app.models.comment import Comment
 from app.models.piece import Piece
 import os
+import resend
+from app.services.email_send_service import send_new_comment_email
+
+resend.api_key = os.environ["RESEND_API_KEY"]
 
 comment_bp = Blueprint('comment', __name__, url_prefix='/pieces')
 
@@ -24,6 +28,8 @@ def create_comment(piece_id):
     
     db.session.add(new_comment)
     db.session.commit()
+
+    send_new_comment_email(new_comment, piece)
     
     return jsonify(new_comment.to_dict()), 201
 
